@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+{% extends "base.html" %}
+{% block page_content %}
+    <div class="card">
+    <div class="card text-white bg-secondary mb-3">
+    <div class="card-body">
+        <form method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            {{ form.as_p }}
+        </div>
+        <button type="submit" class="btn btn-primary"> Submit </button>
+        </form>
+    </div>
+    </div>
+    </div
+
+{% endblock %}
+</body>
+</html>

@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% load static %}
+{% block page_content %}
+<h1> Projects </h1
+
+<div class="d-grid gap-2 d-md-flex justify-content-md-end">
+    <a href="{% url 'project_create' %}" class="btn btn-dark me-md-2"> New Project </a>
+    <a href="#" class="btn btn-dark">  Feedback </a>
+</div>
+
+<div class="container">
+  {% for project in projects %}
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title"> <a href="{% url 'project_detail' project.pk %}"> {{ project.title }} </a></h4>
+        <p class="card-subtitle"> {{ project.date_created}}
+      </div>
+    </div>
+  {% endfor %}
+</div>
+
+{% endblock %}

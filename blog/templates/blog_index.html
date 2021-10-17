@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block page_content %}
+<div class="container">
+    <h1> Blog Index </h1>
+    <div class="card">
+        <div class="card-body">
+            {% for post in posts %}
+                <h4 class="card-title"><a href="{% url 'blog_detail' post.pk %}"> {{ post.title }} </a> </h4>
+                <p class="card-subtitle">
+                    {{ post.created_on.date }}
+                        Categories:&nbsp;
+                    {% for category in post.categories.all %}
+                        <a href="{% url 'blog_category' category.name %}">
+                            {{ category.name }}
+                        </a>&nbsp;
+                    {% endfor %}
+                </p>
+                <p class="card-text">
+                    {{ post.body | slice:":400" }}......
+                </p>
+            {% endfor %}
+       <div>
+    </div>
+</div>
+{% endblock %}

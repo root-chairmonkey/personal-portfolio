@@ -83,7 +83,7 @@ WSGI_APPLICATION = 'personal_portfolio.wsgi.application'
 DATABASES = {
    'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME' : os.path.join(BASE_DIR, 'db.sqlite3'),
+        'NAME' : os.path.join(BASE_DIR, 'db.sqlite3'),`     
         #'NAME': 'personal_portfolio',
         #'USER': 'sylar',
         #'PASSWORD': 'Master@9889',

@@ -14,8 +14,21 @@
     <div class="card-body">
         <form method="post">
         {% csrf_token %}
-        <div class="form-group">
-            {{ form.as_p }}
+        <div class="row mb-3">
+            <label class="col-sm-2 col-form-label"> Title :</label>
+            <div class="col-sm-2"> {{form.title}} </div> 
+        </div>
+        <div class="row mb-3">
+            <label for="exampleFormControlTextarea1" class="col-sm-2 col-form-label"> Description :</label>
+            {{ form.description}}
+        </div>
+        <div class="row mb-3">
+            <label for="exampleFormControlInput1" class="col-sm-2 col-form-label"> Technology :</label>
+            <div class="col-sm-2"> {{form.technology}} </div>
+        </div>
+        <div class="row mb-3">
+            <label for="exampleFormControlInput1" class="col-sm-2 col-form-label"> Collaborator :</label>
+            <div class="col-sm-2"> {{ form.collaborator}} </div>
         </div>
         <button type="submit" class="btn btn-primary"> Submit </button>
         </form>
@@ -24,5 +37,3 @@
     </div
 
 {% endblock %}
-</body>
-</html>

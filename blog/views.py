@@ -8,11 +8,10 @@ from django.http import HttpResponse
 
 def blog_index(request):
     posts = Post.objects.all().order_by('-created_on')
+    context = {  
         "posts": posts,
+    }
     
-    
-     }
-    context = {
     return render(request, "blog_index.html", context)
 
 def blog_category(request, category):

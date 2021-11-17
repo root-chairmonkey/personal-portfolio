@@ -1,7 +1,16 @@
 {% extends "base.html" %}
 {% load static %}
 {% block page_content %}
-<h1> Projects </h1
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<h1> Projects </h1>
 
 <div class="d-grid gap-2 d-md-flex justify-content-md-end">
     <a href="{% url 'project_create' %}" class="btn btn-dark me-md-2"> New Project </a>
@@ -19,4 +28,31 @@
   {% endfor %}
 </div>
 
+<div class="card">
+  <div class="card text-white bg-secondary mb-3">
+  <div class="card-body">
+      <form method="post">
+      {% csrf_token %}
+      <div class="row mb-3">
+          <label class="col-sm-2 col-form-label"> Title :</label>
+          <div class="col-sm-2"> {{form.title}} </div> 
+      </div>
+      <div class="row mb-3">
+          <label for="exampleFormControlTextarea1" class="col-sm-2 col-form-label"> Description :</label>
+          {{ form.description}}
+      </div>
+      <div class="row mb-3">
+          <label for="exampleFormControlInput1" class="col-sm-2 col-form-label"> Technology :</label>
+          <div class="col-sm-2"> {{form.technology}} </div>
+      </div>
+      <div class="row mb-3">
+          <label for="exampleFormControlInput1" class="col-sm-2 col-form-label"> Collaborator :</label>
+          <div class="col-sm-2"> {{ form.collaborator}} </div>
+      </div>
+      <button type="submit" class="btn btn-primary"> Submit </button>
+      </form>
+  </div>
+  </div>
+  </div
+</body>
 {% endblock %}

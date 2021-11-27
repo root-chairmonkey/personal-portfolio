@@ -1,16 +1,32 @@
 
+from django.db.models.query import QuerySet
 from django.forms.forms import Form
 from django.shortcuts import render , redirect
 from projects.forms import ProjectForm
 from projects.models import Project
-from django.urls import reverse_lazy
+from django.http import JsonResponse
 
 # Create your views here.
 
 def project_index(request):
     projects = Project.objects.all()
+    form = ProjectForm()
+    activeProjects = Project.objects.filter(status='active')
+    totalNumactiveProjects = len(activeProjects)
+    totalNumProjects = len(projects)
+    #count = 0
+    #allCollaboratorList = []
+    #while count < totalNumactiveProjects:
+        #allCollaboratorList.append(projects[count].collaborator)
+        #count = count+1
+
     context = {
-        'projects': projects
+        'projects': projects,
+        'form': form,
+        'totalNumProjects': totalNumProjects,
+        'activeProjects': activeProjects,
+        'totalNumactiveProjects': totalNumactiveProjects,
+        #'allCollaboratorList': allCollaboratorList,
     }
     return render(request, 'project_index.html', context)
 
@@ -24,26 +40,15 @@ def project_detail(request, pk):
 
 def project_create(request):
     if request.method == "POST":
+        form = ProjectForm(request.POST)
         title = request.POST['title']
         description = request.POST['description']
         technology = request.POST['technology']
         collaborator = request.POST['collaborator']
-        
+        status = request.POST['status']
         project = Project.objects.create(title=title, description=description, 
-                    technology=technology, collaborator=collaborator)
+                    technology=technology, collaborator=collaborator, status=status)
         project.save()
 
-        projects = Project.objects.all()
-        context = {
-            'projects': projects
-        }
-        return render(request,'project_index.html', context)
-
-    else:
-        form = ProjectForm()
-        context = {
-            'form' : form
-            }
-        return render(request, 'project_create.html', context)
-    
+    return JsonResponse({'status':'submitted'})
     

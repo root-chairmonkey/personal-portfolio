@@ -1,9 +1,17 @@
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
 {% load static %}
 <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
 <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
 
-<nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #12535c;">
+<nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #000607;">
     <div class="container">
         <a class="navbar-brand" href="{% url 'base_index' %}" > Personal Portfolio</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -18,6 +26,7 @@
                 <li class="nav-item"><a class="nav-link" href="#"> Memories </a></li>
                 <li class="nav-item"><a class="nav-link" href="#"> Nest </a></li>
                 <li class="nav-item"><a class="nav-link" href="#"> Memos </a> </li>
+                <li class="nav-item"><a class="nav-link" href="#"> Todo </a> </li>
             </ul>
         </div>
     </div>
@@ -26,5 +35,5 @@
 <div class="container">
 {% block page_content %}{% endblock %}
 </div>
-
+</body>
 <script src="{% static 'js/bootstrap.min.js' %}"></script>

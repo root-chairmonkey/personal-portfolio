@@ -1,51 +1,47 @@
 {% extends 'base.html' %}
 {% block page_content %}
 
-<div class="card-group">
-    <div class="card">
-        <div class="card text-white bg-primary mb3">
-            <div class="card-body">
-                <h4>{{ post.title }}</h4>
+<div class="container px-4">
+    <div class="row gx -5">
+        <div class="col-md-4 bg-success bg-opacity-10 border border-dark shadow-lg">
+            <div class="text-dark text-center">
+                <h4 class="fw-bold shadow-sm"> {{ post.title }} </h4>
             </div>
         </div>
-    </div>
     
             
-    <div class="card">
-        <div class="card text-white bg-primary mb3">
-            <div class="card-body">
-                <h4> {{ post.created_on.date }} </h4>
+        <div class="col-md-4 bg-success bg-opacity-10 ms-auto border border-dark shadow-lg">
+            <div class="text-black  text-center">
+                <h4 class="fw-bold shadow-sm"> {{ post.created_on.date }} </h4>
             </div>
         </div>
     </div>
-</div>    
+      
 
-<div class="card">
-    <div class="card text-white bg-dark mb3">
-        <div class="card-body">
-            <h4> Categories </h4>
-            {% for category in post.categories.all %}
+    <div class="row py-5">
+        <div class="col-md-3 border bg-success bg-opacity-10 border-dark shadow-lg" >
+            <div class="text-black  text-center">
+                <h5 class="fw-bold"> Categories </h5>
+                {% for category in post.categories.all %}
                 <a href="{% url 'blog_category' category.name %}">
                 {{ category.name }}
                 </a>
-            {% endfor %}
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="col-md-8 ms-auto border border-dark shadow-lg py-2">
+            <div class="text-black  text-center">
+                <p> {{ post.body | linebreaks }} </p>
+            </div>
         </div>
     </div>
-</div>
 
-<div class="card" >
-    <div class="card text-white bg-dark mb-3">
-        <div class="card-body">
-            <p> {{ post.body | linebreaks }} </p>
-        </div>
-    </div>
-</div>
-
-<div class="card">
-    <div class="card text-white bg-secondary mb-3">
-        <div class="card-body">
-            <h3>Leave a comment:</h3>
-            <form action="/blog/{{ post.pk }}/" method="post">
+    <div class="row py-5">
+        <div class="col-md-3 border bg-success bg-opacity-10 border-dark shadow-lg" >
+            <div class="text-black  text-center">
+                <h3 class="fw-bold" >Leave a comment:</h3>
+                <form action="/blog/{{ post.pk }}/" method="post">
                 {% csrf_token %}
                 <div class="form-group">
                     {{ form.author }}
@@ -54,25 +50,25 @@
                     {{ form.body }}
                 </div>
                 <button type="submit" class="btn btn-primary"> Submit </button>
-            </form>
+                </form>
+            </div> 
         </div>
-    </div>
-</div>    
 
-<div class="card">
-    <div class="card text-white bg-secondary mb-3">
-        <div class="card-body">
-            <h3> Comments: </h3>
-            {% for comment in comments %}
+        <div class="col-md-8 ms-auto border border-dark shadow-lg py-2">
+            <div class="text-black  text-center">
+                <h3 class="fw-bold"> Comments: </h3>
+                {% for comment in comments %}
                 <p>
                 On {{ comment.created_on.date }}&nbsp;
                 <b> {{ comment.author }} </b> wrote:
                 </p>
                 <p> {{ comment.body }}</p>
                 <hr>
-            {% endfor %}
+                {% endfor %}
+            </div>
         </div>
     </div>
-</div>
+</div> 
+
 
 {% endblock %}

@@ -1,58 +1,87 @@
 {% extends "base.html" %}
 {% load static %}
 {% block page_content %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-<h1> Projects </h1>
 
-<div class="d-grid gap-2 d-md-flex justify-content-md-end">
-    <a href="{% url 'project_create' %}" class="btn btn-dark me-md-2"> New Project </a>
-    <a href="#" class="btn btn-dark">  Feedback </a>
-</div>
+  <h1> Projects </h1>
 
-<div class="container">
-  {% for project in projects %}
-    <div class="card">
-      <div class="card-body">
-        <h4 class="card-title"> <a href="{% url 'project_detail' project.pk %}"> {{ project.title }} </a></h4>
-        <p class="card-subtitle"> {{ project.date_created}}
+  <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+    <button type="submit" id="feedback" class="btn btn-dark">  Feedback </button>
+  </div>
+
+  <div class="container overflow-hidden">
+    <div class="row gap-2">
+      <div class="col-3">
+        <table class="table table-bordered border-primary">
+          <thead class="table table-dark">
+            <tr>
+              <td> Title </td>
+              <td> Date </td>
+            </tr>
+          </thead>
+          <tbody>
+            {% for project in activeProjects %}
+              <tr class="table-info">
+                <td><a href="{% url 'project_detail' project.pk %}"> {{ project.title }} </a></td>
+                <td> <strong> {{ project.date_created}} </strong> </td>
+              </tr>
+            {% endfor %}
+          </tbody> 
+        </table>  
+      </div>  
+
+      <div class="col-3">
+        <table class="table table-bordered border-primary">
+          <thead class="table table-dark">
+            <tr>
+              <td> Total Project count </td>
+              <td> Total Active count </td>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="table-info">
+              <td> <strong> {{ totalNumProjects }} </strong> </td>
+              <td> <strong> {{ totalNumactiveProjects }} </strong> </td>
+            </tr>
+          </tbody> 
+        </table>  
+      </div> 
+      
+      <div class="col-3">
+        <p> {{allCollaboratorList}} </p>
+        <p> {{ac}}</p>
       </div>
     </div>
-  {% endfor %}
-</div>
+    
+    <div class="col text-white">
+      <!-- <div class="card text-white bg-dark mb-3"> -->
+        <form method="post">
+          {% csrf_token %}
+          <div class="p-1 border bg-dark">
+            <label for="titleid" > Title :</label>
+            <div> {{form.title}} </div> 
+          </div>
+          <div class="p-1 border bg-dark">
+            <label for="descriptionid" > Description :</label>
+            <div> {{ form.description}} </div>
+          </div>
+          <div class="p-1 border bg-dark">
+            <label for="technologyid"> Technology :</label>
+            <div > {{form.technology}} </div>
+          </div>
+          <div class="p-1 border bg-dark">
+            <label for="collaboratorid"> Collaborator :</label>
+            <div> {{ form.collaborator}} </div>
+          </div>
+          <div class="p-1 border bg-dark">
+            <label for="statusid"> Status :</label>
+            <div> {{ form.status}} </div>
+          </div>
+          <button type="submit" id="btnsubmit" class="btn btn-primary"> Submit </button>
+        </form>
+      <!-- </div> -->
+    </div>
+  </div>
 
-<div class="card">
-  <div class="card text-white bg-secondary mb-3">
-  <div class="card-body">
-      <form method="post">
-      {% csrf_token %}
-      <div class="row mb-3">
-          <label class="col-sm-2 col-form-label"> Title :</label>
-          <div class="col-sm-2"> {{form.title}} </div> 
-      </div>
-      <div class="row mb-3">
-          <label for="exampleFormControlTextarea1" class="col-sm-2 col-form-label"> Description :</label>
-          {{ form.description}}
-      </div>
-      <div class="row mb-3">
-          <label for="exampleFormControlInput1" class="col-sm-2 col-form-label"> Technology :</label>
-          <div class="col-sm-2"> {{form.technology}} </div>
-      </div>
-      <div class="row mb-3">
-          <label for="exampleFormControlInput1" class="col-sm-2 col-form-label"> Collaborator :</label>
-          <div class="col-sm-2"> {{ form.collaborator}} </div>
-      </div>
-      <button type="submit" class="btn btn-primary"> Submit </button>
-      </form>
-  </div>
-  </div>
-  </div
-</body>
+<script src="{% static 'js/jQuery.js' %}"></script>
+<script src="{% static 'js/ajax.js' %}"></script>
 {% endblock %}

@@ -2,10 +2,11 @@ from django.shortcuts import render
 from blog.models import Post, Comment
 from .forms import CommentForm
 from django.http import HttpResponse
+from django.contrib.auth.decorators import login_required
     
 # Create your views here.
 
-
+@login_required(login_url='base_index')
 def blog_index(request):
     posts = Post.objects.all().order_by('-created_on')
     context = {  
@@ -14,6 +15,7 @@ def blog_index(request):
     
     return render(request, "blog_index.html", context)
 
+@login_required(login_url='base_index')
 def blog_category(request, category):
     posts = Post.objects.filter(
         categories__name__contains=category
@@ -26,6 +28,7 @@ def blog_category(request, category):
     }
     return render(request, "blog_category.html", context)
 
+@login_required(login_url='base_index')
 def blog_detail(request, pk):
     post = Post.objects.get(pk=pk)
 

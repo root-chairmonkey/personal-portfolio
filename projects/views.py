@@ -5,9 +5,11 @@ from django.shortcuts import render , redirect
 from projects.forms import ProjectForm
 from projects.models import Project
 from django.http import JsonResponse
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 
+@login_required(login_url='base_index')
 def project_index(request):
     projects = Project.objects.all()
     form = ProjectForm()
@@ -30,6 +32,7 @@ def project_index(request):
     }
     return render(request, 'project_index.html', context)
 
+#@login_required(login_url='base_index')
 def project_detail(request, pk):
     project = Project.objects.get(pk=pk)
     context = {

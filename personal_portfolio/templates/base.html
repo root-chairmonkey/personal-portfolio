@@ -27,6 +27,8 @@
                 <li class="nav-item"><a class="nav-link" href="#"> Nest </a></li>
                 <li class="nav-item"><a class="nav-link" href="#"> Memos </a> </li>
                 <li class="nav-item"><a class="nav-link" href="#"> Todo </a> </li>
+                <li class="nav-item">{{ request.user }} </li>
+                <li class="nav-item"> <a class="nav-link" href="{% url 'logout_user' %}"> Logout </a></li>
             </ul>
         </div>
     </div>
